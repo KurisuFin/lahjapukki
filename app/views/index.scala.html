@@ -1,7 +1,15 @@
-@(message: String)
+@(bands: List[Band])
 
-@main("Welcome to Play 2.1") {
-    
-    @play20.welcome(message, style = "Java")
-    
+@main {
+	<header>
+		<hgroup>
+			<h1>LahjaPulkki</h1>
+		</hgroup>
+	</header>
+
+	<div class="bands">
+		@bands.map { band =>
+			<p>@band.name</p>
+		}
+	</div>
 }
