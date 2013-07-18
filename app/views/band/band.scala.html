@@ -1,0 +1,24 @@
+@(user: User, band: Band)
+
+@main(user) {
+	<header>
+		<hgroup>
+			<h1>@band.name</h1>
+			<h2 id="created">Created: @band.created</h2>
+			<h2 id="dueDate">Due date: @band.dueDate</h2>
+		</hgroup>
+	</header>
+
+	<article>
+		<ul>
+			<h3>Members:</h3>
+			@band.participations.map { part =>
+				@if(part.participant == band.operator) {
+					<li id="operator">@part.participant.name</li>
+				} else {
+					<li>@part.participant.name</li>
+				}
+			}
+		</ul>
+	</article>
+}

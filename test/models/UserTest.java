@@ -19,9 +19,10 @@ public class UserTest extends WithApplication{
 	@Test
 	public void createAndRetrieveUser() {
 		new User("bob@mail.com", "Bob", "secret").save();
-		User user = User.find.where().eq("email", "bob@mail.com").findUnique();
-		assertNotNull(user);
-		assertEquals("bob@mail.com", user.email);
-		assertEquals("Bob", user.name);
+		User participant = User.find.where().eq("email", "bob@mail.com").findUnique();
+		assertNotNull(participant);
+		assertEquals("bob@mail.com", participant.email);
+		assertEquals("Bob", participant.name);
 	}
+
 }

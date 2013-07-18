@@ -1,26 +1,28 @@
 @(bands: List[Band])
 
-@main {
+@main(null) {
 	<header>
 		<hgroup>
 			<h1>LahjaPulkki (admin)</h1>
 		</hgroup>
 	</header>
 
-	@bands.map { band =>
-		<div id="band@band.id" class="band">
-			<h2>@band.name</h2>
-			<ul>
-				@band.members.map { user =>
+	<article>
+		@bands.map { band =>
+			<div id="band@band.id" class="band">
+				<h2>@band.name</h2>
+				<ul>
+					@band.participations.map { part =>
 					<li>
-						@if(user == band.operator) {
-							<b>@user.name</b>
+						@if(part.participant == band.operator) {
+						<b>@part.participant.name</b>
 						} else {
-							@user.name
+						@part.participant.name
 						}
 					</li>
-				}
-			</ul>
-		</div>
-	}
+					}
+				</ul>
+			</div>
+		}
+	</article>
 }

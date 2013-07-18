@@ -13,9 +13,7 @@ public class Application extends Controller {
   
     public static Result index() {
 	    return ok(index.render(
-		        Band.findBands((long)1)
+			User.find.byId((long)3)        // <- tähän oikea käyttäjä
         ));
     }
-
-
 }

@@ -1,15 +1,17 @@
-@(bands: List[Band])
+@(user: User)
 
-@main {
+@main(user) {
 	<header>
-		<hgroup>
-			<h1>LahjaPulkki</h1>
-		</hgroup>
+		<h2>Hello @user.name!</h2>
 	</header>
 
-	<div class="bands">
-		@bands.map { band =>
-			<p>@band.name</p>
+	<article>
+		@user.participations.map { part =>
+			<a href="@routes.Bands.band(part.band.id)">
+				<div class="band" id="band@part.band.id">
+					<h3>@part.band.name</h3>
+				</div>
+			</a>
 		}
-	</div>
+	</article>
 }
