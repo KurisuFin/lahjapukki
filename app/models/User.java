@@ -20,7 +20,7 @@ public class User extends Model {
 	public List<Participation> participations;
 
 	// TODO: salasanan hastagaaminen
-	public User(String email, String name, String password) {
+	private User(String email, String name, String password) {
 		this.email = email;
 		this.name = name;
 		this.password = password;
@@ -32,6 +32,20 @@ public class User extends Model {
 		User user = new User(email, name, password);
 		user.save();
 		return user;
+	}
+
+	public static User authenticate(String email, String password) {
+		return find.where()
+				.eq("email", email)
+				.eq("password", password)
+				.findUnique();
+	}
+
+	public static Long findID(String email) {
+		return find.where()
+				.eq("email", email)
+				.findUnique()
+				.id;
 	}
 
 //	public void add(Participation participation) {

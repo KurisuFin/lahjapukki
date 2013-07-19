@@ -1,43 +1,11 @@
 # Users
 
-- &tiina !!models.User
-    email:      tiina@mail.com
-    name:       Tiina
-    password:   sala
+- &jack !!models.User
+    email:      jack@mail.com
+    name:       Jack
+    password:   secret
 
-- &ville !!models.User
-    email:      ville@mail.com
-    name:       Ville
-    password:   sala
-
-- &pekka !!models.User
-    email:      pekka@mail.com
-    name:       Pekka
-    password:   sala
-
-- &jaana !!models.User
-    email:      jaana@mail.com
-    name:       Jaana
-    password:   sala
-
-- &heini !!models.User
-    email:      heini@mail.com
-    name:       Heini
-    password:   sala
-
-# Bands
-
-- &band1 !!models.Band
-    name:       Porukka
-    operator:   *tiina
-    members:
-        - *ville
-        - *tiina
-        - *pekka
-
-- &band2 !!models.Band
-    name:       Jengi
-    operator:   *pekka
-    members:
-        - *pekka
-        - *jaana
+- &jeff !!models.User
+    email:      jeff@mail.com
+    name:       Jeff
+    password:   secret

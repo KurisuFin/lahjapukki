@@ -59,7 +59,7 @@ public class BandTest extends WithApplication {
 		assertEquals(2, jeff.participations.size());
 		assertEquals(3, fred.participations.size());
 
-		printDatabase();
+//		printDatabase();
 	}
 
 	public static void printDatabase() {

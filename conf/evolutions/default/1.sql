@@ -7,7 +7,8 @@ create table band (
   id                        bigint not null,
   name                      varchar(255),
   created                   timestamp,
-  due_date                  timestamp,
+  randomize                 timestamp,
+  reveal                    timestamp,
   operator_id               bigint,
   constraint pk_band primary key (id))
 ;
@@ -27,11 +28,20 @@ create table user (
   constraint pk_user primary key (id))
 ;
 
+create table wish (
+  id                        bigint not null,
+  participation_id          bigint not null,
+  description               varchar(255),
+  constraint pk_wish primary key (id))
+;
+
 create sequence band_seq;
 
 create sequence participation_seq;
 
 create sequence user_seq;
+
+create sequence wish_seq;
 
 alter table band add constraint fk_band_operator_1 foreign key (operator_id) references user (id) on delete restrict on update restrict;
 create index ix_band_operator_1 on band (operator_id);
@@ -39,6 +49,8 @@ alter table participation add constraint fk_participation_band_2 foreign key (ba
 create index ix_participation_band_2 on participation (band_id);
 alter table participation add constraint fk_participation_participant_3 foreign key (participant_id) references user (id) on delete restrict on update restrict;
 create index ix_participation_participant_3 on participation (participant_id);
+alter table wish add constraint fk_wish_participation_4 foreign key (participation_id) references participation (id) on delete restrict on update restrict;
+create index ix_wish_participation_4 on wish (participation_id);
 
 
 
@@ -52,6 +64,8 @@ drop table if exists participation;
 
 drop table if exists user;
 
+drop table if exists wish;
+
 SET REFERENTIAL_INTEGRITY TRUE;
 
 drop sequence if exists band_seq;
@@ -59,4 +73,6 @@ drop sequence if exists band_seq;
 drop sequence if exists participation_seq;
 
 drop sequence if exists user_seq;
+
+drop sequence if exists wish_seq;
 

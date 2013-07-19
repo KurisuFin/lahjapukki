@@ -1,0 +1,35 @@
+@(form: Form[Application.Login])
+<!DOCTYPE html>
+<html>
+<head>
+	<title>LahjaPulkki</title>
+	<link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+	<link rel="stylesheet" type="text/css" media="screen" href="@routes.Assets.at("stylesheets/login.css")">
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+	<script type="text/javascript" src="@routes.Assets.at("javascripts/login.js")"></script>
+</head>
+<body>
+<header>
+	<a href="@routes.Application.index" id="logo"><span>Lahja</span>Pulkki</a>
+</header>
+	@helper.form(routes.Application.authenticate) {
+		<h1>Sign in</h1>
+
+		@if(form.hasGlobalErrors) {
+			<p class="error">@form.globalError.message</p>
+		}
+		@if(flash.contains("success")) {
+			<p class="success">@flash.get("success")</p>
+		}
+		<p>
+			<input type="email" name="email" placeholder="Email" value="@form("email").value">
+		</p>
+		<p>
+			<input type="password" name="password" placeholder="Password">
+		</p>
+		<p>
+			<button type="submit" id="log">Login</button>
+		</p>
+	}
+</body>
+</html>

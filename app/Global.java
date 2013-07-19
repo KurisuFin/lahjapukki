@@ -1,22 +1,15 @@
-
-import com.avaje.ebean.Ebean;
 import models.Band;
 import models.User;
 import play.Application;
 import play.GlobalSettings;
-import play.libs.Yaml;
-
-import java.util.List;
 
 
 public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application app) {
-		if (User.find.findRowCount() == 0) {
-//			Ebean.save((List) Yaml.load("test-data.yml"));
+		if (User.find.findRowCount() == 0)
 			populateDatabase();
-		}
 	}
 
 
@@ -33,6 +26,10 @@ public class Global extends GlobalSettings {
 
 		Band band2 = Band.create("Jengi", pekka.id);
 		band2.add(jaana.id);
+
+
+		band1.addWish(pekka.id, "Paljon rahaa");
+		band1.addWish(pekka.id, "Sitäkin enemmän rakkautta");
 	}
 
 }

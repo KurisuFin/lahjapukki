@@ -1,5 +1,6 @@
 package models;
 
+import controllers.Application;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -14,7 +15,8 @@ public class Band extends Model {
 	public Long id;
 	public String name;
 	public Date created;
-	public Date dueDate;
+	public Date randomize;
+	public Date reveal;
 	@ManyToOne
 	public User operator;
 	@OneToMany(mappedBy="band", cascade=CascadeType.ALL)
@@ -44,6 +46,17 @@ public class Band extends Model {
 //		user.add(participation);                // Probably not needed
 		participation.save();
 	}
+
+	public void addWish(Long userID, String wishDescription) {
+		Participation participation = Participation.findParticipation(id, userID);
+		participation.addWish(wishDescription);
+	}
+
+	public List<Wish> getWishes(Long userID) {
+		Participation participation = Participation.findParticipation(id, userID);
+		return participation.wishes;
+	}
+
 
 	@Override
 	public String toString() {

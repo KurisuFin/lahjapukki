@@ -4,8 +4,10 @@ import models.Band;
 import models.User;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 import views.html.admin.*;
 
+@Security.Authenticated(Secured.class)
 public class Admin extends Controller {
 
 	public static Result index() {

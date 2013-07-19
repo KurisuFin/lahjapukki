@@ -2,10 +2,7 @@ package models;
 
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,8 @@ public class Participation extends Model {
 	public Band band;
 	@ManyToOne
 	public User participant;
-	public List<String> wishes;
+	@OneToMany(cascade=CascadeType.ALL)
+	public List<Wish> wishes;
 //	@ManyToMany
 //	public List<User> targets;
 
@@ -38,16 +36,33 @@ public class Participation extends Model {
 				.findList();
 	}
 
+	public static Participation findParticipation(Long bandID, Long userID) {
+		return find.where()
+				.eq("band.id", bandID)
+				.eq("participant.id", userID)
+				.findUnique();
+	}
+
 	public static Participation create(Band band, User participant) {
 		return new Participation(band, participant);
 	}
 
-	public void addWish(String wish) {
-		wishes.add(wish);
+	public void addWish(String description) {
+		wishes.add(new Wish(description));
+		this.save();
 	}
+
 /*
 	public void addTarget(User target) {
 		targets.add(target);
 	}
 */
+
+	@Override
+	public String toString() {
+		return  "PARTICIPATION: "+id+
+				"\nBand: "+band.name+
+				"\nParticipant: "+participant.name+
+				"\nWishes: "+wishes;
+	}
 }
