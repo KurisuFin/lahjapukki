@@ -16,22 +16,22 @@ import com.avaje.ebean.Ebean;
 import com.google.common.collect.ImmutableMap;
 
 public class LoginTest extends WithApplication {
-
+	
 	@Before
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase(), fakeGlobal()));
 		Ebean.save((List) Yaml.load("test-data.yml"));
 	}
-
+	
 	@Test
 	public void tryAuthenticateUser() {
 		User.create("bob@mail.com", "Bob", "secret");
-
+		
 		assertNotNull(User.authenticate("bob@mail.com", "secret"));
 		assertNull(User.authenticate("bob@mail.com", "badpassword"));
 		assertNull(User.authenticate("tom@mail.com", "secret"));
 	}
-
+	
 	@Test
 	public void authenticateSuccess() {
 		Result result = callAction(
@@ -40,12 +40,12 @@ public class LoginTest extends WithApplication {
 						"email", "jack@mail.com",
 						"password", "secret"))
 		);
-
+		
 		assertEquals(303, status(result));
 		Long userID = Long.parseLong(session(result).get("userID"));
 		assertEquals("jack@mail.com", User.find.byId(userID).email);
 	}
-
+	
 	@Test
 	public void authenticateFailure() {
 		Result result = callAction(
@@ -57,18 +57,18 @@ public class LoginTest extends WithApplication {
 		assertEquals(400, status(result));
 		assertNull(session(result).get("userID"));
 	}
-
+	
 	@Test
 	public void authenticated() {
 		Long bellaID = User.create("bella@mail.com", "Bella", "secret").id;
-
+		
 		Result result = callAction(
 				controllers.routes.ref.Application.index(),
 				fakeRequest().withSession("userID", ""+bellaID)
 		);
 		assertEquals(200, status(result));
 	}
-
+	
 	@Test
 	public void notAuthenticated() {
 		Result result = callAction(

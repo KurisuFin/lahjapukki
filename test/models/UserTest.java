@@ -10,12 +10,12 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
 public class UserTest extends WithApplication{
-
+	
 	@Before
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase()));
 	}
-
+	
 	@Test
 	public void createAndRetrieveUser() {
 		new User("bob@mail.com", "Bob", "secret").save();

@@ -1,8 +1,8 @@
-@(user: User)(content: Html)
+@(user: User, bands: List[Band])(content: Html)
 <!DOCTYPE html>
 <html>
 <head>
-    <title>LahjaPulkki</title>
+    <title>LahjaPukki</title>
 	<link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
     <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
     <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
@@ -14,22 +14,31 @@
 
 <body>
     <header id="bar">
-	    <a href="@routes.Application.index" id="logo">Lahja<span>Pulkki</span></a>
+	    <a href="@routes.Application.index" id="logo">Lahja<span>Pukki</span></a>
 	    <dl id="loggedUser">
 		    <dt>@user.name</dt>
 		    <dd><a href="@routes.Application.logout()">Logout</a></dd>
 	    </dl>
     </header>
 
-    <nav>
+    <nav id="drawer">
 	    <h4>My bands</h4>
-	    <ul id="myBands">
+	    <ul id="myBands" class="bandList">
 		    @user.participations.map { part =>
-		        <li>
-			        <a href="@routes.Bands.band(part.band.id)">@part.band.name</a>
-		        </li>
+		        @views.html.bands.band(part.band)
 		    }
 	    </ul>
+
+	    <h4>Other bands</h4>
+	    <ul id="allBands" class="bandList">
+			@bands.map { band =>
+				@if(!band.isMember()) {
+					@views.html.bands.band(band)
+		        }
+		    }
+	    </ul>
+
+	    <a id="newBand" href="@routes.Bands.addForm()">New band</a>
     </nav>
 	<section id="main">
         @content

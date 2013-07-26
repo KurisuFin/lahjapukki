@@ -6,11 +6,11 @@ import static play.test.Helpers.start;
 
 
 public class ApplicationTest {
-
+	
 	@Before
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase()));
 	}
-
-
+	
+	
 }

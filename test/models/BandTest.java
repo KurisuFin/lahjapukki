@@ -10,64 +10,61 @@ import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
 public class BandTest extends WithApplication {
-
+	
 	@Before
 	public void setUp() {
 		start(fakeApplication(inMemoryDatabase()));
 	}
-
+	
 	@Test
 	public void createAndRetrieveBand() {
 		User user = User.create("tina@mail.com", "Tina", "secret");
 		Band.create("TestGang", user.id);
-
+		
 		Band band = Band.find.where().eq("name", "TestGang").findUnique();
 		assertNotNull(band);
 		assertEquals("TestGang", band.name);
 		assertEquals(user.id, band.operator.id);
 	}
-
+	
 	@Test
 	public void addUserToBand() {
-		User tina = User.create("tina@mail.com", "Tina", "secret");
-		User jack = User.create("jack@mail.com", "Jack", "secret");
-		Band band = Band.create("TestGang", tina.id);
-
-		band.add(jack.id);
-		assertEquals(tina.id, band.participations.get(0).id);
-		assertEquals(jack.id, band.participations.get(1).id);
+		Long tina = User.create("tina@mail.com", "Tina", "secret").id;
+		Long jack = User.create("jack@mail.com", "Jack", "secret").id;
+		Band band = Band.create("TestGang", tina);
+		band.add(jack);
+		
+		assertEquals(tina, band.participations.get(0).participant.id);
+		assertEquals(jack, band.participations.get(1).participant.id);
 	}
-
+	
 	@Test
 	public void addTwoUsersToMultipleBands() {
-		User jeff = User.create("jeff@mail.com", "Jeff", "secret");
-		User fred = User.create("fred@mail.com", "Fred", "secret");
-
-		jeff = User.find.byId(jeff.id);
-		fred = User.find.byId(fred.id);
-
-		Band band1 = Band.create("Band1", jeff.id);
-		Band band2 = Band.create("Band2", fred.id);
-		Band band3 = Band.create("Band3", fred.id);
-
-		band1.add(fred.id);
-		band2.add(jeff.id);
-
+		Long jeff = User.create("jeff@mail.com", "Jeff", "secret").id;
+		Long fred = User.create("fred@mail.com", "Fred", "secret").id;
+		
+		Band band1 = Band.create("Band1", jeff);
+		Band band2 = Band.create("Band2", fred);
+		Band band3 = Band.create("Band3", fred);
+		
+		band1.add(fred);
+		band2.add(jeff);
+		
 		assertEquals(2, band1.participations.size());
 		assertEquals(2, band2.participations.size());
 		assertEquals(1, band3.participations.size());
-		assertEquals(2, jeff.participations.size());
-		assertEquals(3, fred.participations.size());
-
-//		printDatabase();
+		assertEquals(2, User.find.byId(jeff).participations.size());
+		assertEquals(3, User.find.byId(fred).participations.size());
 	}
-
+	
+	
+	
 	public static void printDatabase() {
 		System.out.println("\n----- Users -----");
 		for (User user : User.find.all()) {
 			System.out.println(user);
 		}
-
+		
 		System.out.println("\n----- Bands -----");
 		for (Band band : Band.find.all()) {
 			System.out.println(band);

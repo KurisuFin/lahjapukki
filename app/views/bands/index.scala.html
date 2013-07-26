@@ -1,0 +1,51 @@
+@(user: User, band: Band, bands: List[Band])
+
+@main(user, bands) {
+<header id="bandHeader">
+	<hgroup>
+		<h1>@band.name</h1>
+		<h2 id="created">Created: @band.created</h2>
+		<h2 id="randomize">Randomize: @band.randomize</h2>
+		<h2 id="reveal">Reveal: @band.reveal</h2>
+	</hgroup>
+	@if(band.isOperator()) {
+		<button id="bandEdit" style="background-color:tomato">Edit</button>
+		<div id="bandEditConfirm" hidden>
+			<button id="bandEditSave" style="background-color:tomato">Save</button>
+			<button id="bandEditCancel">Cancel</button>
+		</div>
+	}
+</header>
+
+<article id="members">
+	<h3>Members</h3>
+	<ul>
+		@band.participations.map { part =>
+			@if(part.participant == band.operator) {
+				<li id="operator">@part.participant.name</li>
+			} else {
+				<li>@part.participant.name</li>
+			}
+		}
+	</ul>
+</article>
+
+@if(band.isMember()) {
+	<article id="yourTargets">
+		<h3>Your targets</h3>
+	</article>
+
+	<article id="myWishes">
+		<h3>My wishes</h3>
+		<ul>
+			@band.getWishes(user.id).map { wish =>
+				@views.html.wishes.wish(wish)
+			}
+		</ul>
+		<form id="addWish">
+			<textarea name="description" rows="5" cols="70" placeholder="Write a new wish..."></textarea><br />
+			<input type="submit" value="Add" style="background-color:tomato" />
+		</form>
+	</article>
+}
+}

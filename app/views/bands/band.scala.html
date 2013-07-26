@@ -1,0 +1,5 @@
+@(band: Band)
+
+<li data-band="@band.id">
+	<a href="@routes.Bands.index(band.id)">@band.name</a>
+</li>

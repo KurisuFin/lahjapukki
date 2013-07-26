@@ -1,12 +1,14 @@
 package models;
 
 import controllers.Application;
+import play.data.Form;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 
 @Entity
 public class Band extends Model {
@@ -54,8 +56,40 @@ public class Band extends Model {
 
 	public List<Wish> getWishes(Long userID) {
 		Participation participation = Participation.findParticipation(id, userID);
-		return participation.wishes;
+		if (participation != null)
+			return participation.wishes;
+		else
+			return new ArrayList<>();
 	}
+
+	public boolean isMember() {
+		for (Participation participation : participations)
+			if (Application.getUserID().equals(participation.participant.id))
+				return true;
+
+		return false;
+	}
+
+	public boolean isOperator() {
+		return Application.getUserID().equals(operator.id);
+	}
+
+
+/*
+	public static boolean isMember(Long bandID, Long userID) {
+		return find.where()
+				.eq("id", bandID)
+				.eq("participations.participant.id", userID)
+				.findRowCount() > 0;
+	}
+
+	public static boolean isOperator(Long bandID, Long userID) {
+		return find.where()
+				.eq("id", bandID)
+				.eq("operator.id", userID)
+				.findRowCount() > 0;
+	}
+*/
 
 
 	@Override

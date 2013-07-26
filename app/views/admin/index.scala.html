@@ -1,12 +1,12 @@
 @(bands: List[Band])
 
-@main(null) {
+@main(null, null) {
 	<header>
 		<hgroup>
 			<h1>LahjaPulkki (admin)</h1>
 		</hgroup>
 	</header>
-
+	
 	<article>
 		@bands.map { band =>
 			<div id="band@band.id" class="band">

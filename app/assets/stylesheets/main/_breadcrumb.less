@@ -4,13 +4,22 @@
 // author: mda@zenexity.com - 2011
 // -----------------------------------
 
+.rounded(@radius: 6px) {
+		border-radius: @radius;
+		-webkit-border-radius: @radius;
+		-moz-border-radius: @radius;
+}
+
 #main {
 		header {
-				background-color: darken(@mainBackground, 10%);
+				padding: 10px;
 
 				hgroup {
 						h1 {
 								font-size: 38px;
+								input {
+									font-size:38px;
+								}
 						}
 
 						h2 {
@@ -20,6 +29,11 @@
 		}
 
 		article {
+				.rounded(10px);
+				background-color: #fff;
+				margin: 10px;
+				padding: 10px;
+
     		h3 {
     				font-size: 18px;
     		}
@@ -32,13 +46,11 @@
 
 #myWishes {
 		li {
-				background-color: #ffffff;
+				.rounded();
+				border: 1px solid #111;
+				background-color: #fff;
 				margin: 10px;
 				padding: 5px;
-		}
-
-		.deleteElement {
-				display: none;
 		}
 }
 

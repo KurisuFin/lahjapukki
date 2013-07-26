@@ -9,7 +9,8 @@ GET     /logout                     controllers.Application.logout()
 
 # Home page
 GET     /                           controllers.Application.index()
-GET     /bands/:band                controllers.Bands.band(band: Long)
+GET     /bands/add                  controllers.Bands.addForm()
+GET     /bands/:band                controllers.Bands.index(band: Long)
 GET     /admin                      controllers.Admin.index()
 
 # Tarkista vielä tarviiko

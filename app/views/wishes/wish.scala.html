@@ -1,0 +1,18 @@
+@(wish: Wish)
+
+<li data-wish=@wish.id>
+	<div class="wishDescription">@wish.description</div>
+	<div class="wishButtonPanel">
+		<button class="wishEdit">Edit</button>
+		<button class="wishDelete">Delete</button>
+		<div class="wishDeleteConfirm" hidden>
+			Do you really want to delete this wish?
+			<button class="wishDeleteYes" style="background-color:tomato">Yes</button>
+			<button class="wishDeleteNo">No</button>
+		</div>
+	</div>
+	<div class="wishEditConfirm" hidden>
+		<button class="wishEditSave" style="background-color:tomato">Save</button>
+		<button class="wishEditCancel">Cancel</button>
+	</div>
+</li>
