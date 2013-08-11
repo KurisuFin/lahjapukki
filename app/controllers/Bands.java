@@ -11,7 +11,7 @@ import static play.data.Form.form;
 
 @Security.Authenticated(Secured.class)
 public class Bands extends Controller {
-	
+
 	public static Result index(Long band) {
 		return ok(views.html.bands.index.render(
 				User.find.byId(Application.getUserID()),
@@ -19,7 +19,7 @@ public class Bands extends Controller {
 				Band.find.all()
 		));
 	}
-	
+
 	public static Result addForm() {
 		return ok(views.html.bands.add.render(
 				User.find.byId(Application.getUserID()),
@@ -30,6 +30,8 @@ public class Bands extends Controller {
 	public static Result add() {
 		Form<Band> bandForm = form(Band.class).bindFromRequest();
 
+
+		// Nämä uuteen uskoon
 		if (bandForm.hasErrors()) {
 			return badRequest();
 		} else {
@@ -41,4 +43,8 @@ public class Bands extends Controller {
 		}
 	}
 */
+	public static Result delete(Long id) {
+		Band.find.byId(id).delete();
+		return ok();
+	}
 }

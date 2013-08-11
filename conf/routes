@@ -10,11 +10,17 @@ GET     /logout                     controllers.Application.logout()
 # Home page
 GET     /                           controllers.Application.index()
 GET     /bands/add                  controllers.Bands.addForm()
+#POST    /bands/add                  controllers.Bands.add()
 GET     /bands/:band                controllers.Bands.index(band: Long)
 GET     /admin                      controllers.Admin.index()
 
-# Tarkista vielä tarviiko
-# GET     /assets/javascripts/routes  controllers.Application.javascriptRoutes()
+DELETE  /bands/:band                controllers.Bands.delete(band: Long)
+
+POST    /wishes/participations/:participation   controllers.Wishes.add(participation: Long)
+DELETE  /wishes/:wish               controllers.Wishes.delete(wish: Long)
+
+# Javascripts
+GET     /assets/javascripts/routes  controllers.Application.javascriptRoutes()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

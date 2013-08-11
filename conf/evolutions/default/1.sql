@@ -30,7 +30,7 @@ create table user (
 
 create table wish (
   id                        bigint not null,
-  participation_id          bigint not null,
+  participation_id          bigint,
   description               varchar(255),
   constraint pk_wish primary key (id))
 ;

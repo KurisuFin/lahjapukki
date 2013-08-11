@@ -3,6 +3,9 @@ log = (message) ->
 
 
 $ ->
+	Backbone.history.start
+		pushHistory: true
+
 	band = new Band el: $("#main")
 
 
@@ -13,6 +16,17 @@ class Band extends Backbone.View
 
 		$("#myWishes ul li").each (i, li) ->
 			new Wish el: li
+
+		$("#addWish input[value=Add]").click (e) ->
+			e.preventDefault()
+			participationID = $("#addWish input[name=participationID]").val()
+			console.log(participationID)
+
+			jsRoutes.controllers.Wishes.add(participationID).ajax
+				success: ->
+					console.log("jiihaa")
+				error: (err) ->
+					console.log(err)
 
 
 class BandHeader extends Backbone.View
@@ -70,13 +84,24 @@ class Wish extends Backbone.View
 		$(@el).children(".wishEditConfirm").hide()
 
 	delete: ->
-  		$(@el).find(".wishDeleteConfirm").show()
+		$(@el).find(".wishDeleteConfirm").show()
 
-  deleteYes: ->
-  		log("deleteYes "+@id)
+	deleteYes: ->
+#		@loading(true)
+		jsRoutes.controllers.Wishes.delete(@id).ajax
+			context: this
+			success: ->
+				$(@el).remove()
+			error: (err) ->
+				console.log(err)
 
-  deleteNo: ->
-  		$(@el).find(".wishDeleteConfirm").hide()
+
+
+
+
+
+	deleteNo: ->
+		$(@el).find(".wishDeleteConfirm").hide()
 
 	createTextArea: ->
 		"<textarea name='description' rows='5' cols='70'>"+

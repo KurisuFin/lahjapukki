@@ -49,10 +49,6 @@ public class Band extends Model {
 		participation.save();
 	}
 
-	public void addWish(Long userID, String wishDescription) {
-		Participation participation = Participation.findParticipation(id, userID);
-		participation.addWish(wishDescription);
-	}
 
 	public List<Wish> getWishes(Long userID) {
 		Participation participation = Participation.findParticipation(id, userID);
@@ -74,7 +70,9 @@ public class Band extends Model {
 		return Application.getUserID().equals(operator.id);
 	}
 
-
+	public Participation getParticipation(Long userID) {
+		return Participation.findParticipation(id, userID);
+	}
 /*
 	public static boolean isMember(Long bandID, Long userID) {
 		return find.where()

@@ -9,7 +9,7 @@
 		<h2 id="reveal">Reveal: @band.reveal</h2>
 	</hgroup>
 	@if(band.isOperator()) {
-		<button id="bandEdit" style="background-color:tomato">Edit</button>
+		<button id="bandEdit" style="background-color:khaki">Edit</button>
 		<div id="bandEditConfirm" hidden>
 			<button id="bandEditSave" style="background-color:tomato">Save</button>
 			<button id="bandEditCancel">Cancel</button>
@@ -43,6 +43,7 @@
 			}
 		</ul>
 		<form id="addWish">
+			<input type="hidden" name="participationID" value="@band.getParticipation(user.id).id" />
 			<textarea name="description" rows="5" cols="70" placeholder="Write a new wish..."></textarea><br />
 			<input type="submit" value="Add" style="background-color:tomato" />
 		</form>
