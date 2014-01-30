@@ -10,10 +10,15 @@ public class Global extends GlobalSettings {
 
 	@Override
 	public void onStart(Application app) {
-		if (User.find.findRowCount() == 0)
+		if (User.find.findRowCount() == 0) {
 			populateDatabase();
+//			populate();
+		}
 	}
 
+	public static void populate() {
+		Long pekka = User.create("pekka@mail.com", "Pekka", "sala").id;
+	}
 
 	public static void populateDatabase() {
 		Long tiina = User.create("tiina@mail.com", "Tiina", "sala").id;

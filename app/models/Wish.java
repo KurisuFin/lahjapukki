@@ -13,13 +13,26 @@ public class Wish extends Model {
 	public Participation participation;
 	public String description;
 
-	private Wish(Participation participation, String description) {
+	public Wish() {
+	}
+
+	public Wish(Participation participation, String description) {
 		this.participation = participation;
 		this.description = description;
 	}
 
 	public static Wish create(Participation participation, String description) {
 		Wish wish = new Wish(participation, description);
+//		participation.wishes.add(wish);
+		wish.save();
+
+		return wish;
+//		return create(new Wish(), participation, description);
+	}
+
+	public static Wish create(Wish wish, Participation participation, String description) {
+		wish.participation = participation;
+		wish.description = description;
 		wish.save();
 		return wish;
 	}
@@ -35,6 +48,7 @@ public class Wish extends Model {
 
 	@Override
 	public String toString() {
-		return "Wish "+id+": "+ description;
+		return id+": "+description+
+				"\n  - Participation "+participation.id+": "+participation.participant.name+" "+participation.band.name;
 	}
 }

@@ -44,6 +44,7 @@
 		</ul>
 		<form id="addWish">
 			<input type="hidden" name="participationID" value="@band.getParticipation(user.id).id" />
+			<input type="hidden" name="participation" value="@band.getParticipation(user.id)" />
 			<textarea name="description" rows="5" cols="70" placeholder="Write a new wish..."></textarea><br />
 			<input type="submit" value="Add" style="background-color:tomato" />
 		</form>

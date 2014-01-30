@@ -58,6 +58,22 @@ public class Band extends Model {
 			return new ArrayList<>();
 	}
 
+	public List<User> getUsers() {
+		List<User> users = new ArrayList<>();
+
+		for (Participation participation : participations) {
+			users.add(participation.participant);
+		}
+
+/*		List<User> users = new ArrayList<>();
+
+		for (Participation participation : Participation.find.where().eq("band.id", id).findList()) {
+			users.add(participation.participant);
+		}
+*/
+		return users;
+	}
+
 	public boolean isMember() {
 		for (Participation participation : participations)
 			if (Application.getUserID().equals(participation.participant.id))

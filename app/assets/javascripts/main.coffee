@@ -20,9 +20,19 @@ class Band extends Backbone.View
 		$("#addWish input[value=Add]").click (e) ->
 			e.preventDefault()
 			participationID = $("#addWish input[name=participationID]").val()
+			description = $("#addWish textarea[name=description]").val()
+
+			participation = $("#addWish input[name=participation]").val()
+
 			console.log(participationID)
+			console.log(description)
 
 			jsRoutes.controllers.Wishes.add(participationID).ajax
+				type: "POST"
+				data:
+					participation: participation
+					description: description
+
 				success: ->
 					console.log("jiihaa")
 				error: (err) ->

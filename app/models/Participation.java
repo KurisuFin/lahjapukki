@@ -59,9 +59,23 @@ public class Participation extends Model {
 
 	@Override
 	public String toString() {
-		return  "PARTICIPATION: "+id+
-				"\nBand: "+band.name+
-				"\nParticipant: "+participant.name+
-				"\nWishes: "+wishes;
+		StringBuilder builder = new StringBuilder();
+
+		if (wishes.size() > 0) {
+			builder.append("[ ");
+			for (Wish wish : wishes)     {
+				builder.append(wish.id);
+				builder.append(", ");
+			}
+			builder.deleteCharAt(builder.length()-2);
+			builder.append("]");
+		} else {
+			builder.append("[]");
+		}
+
+		return  "Participation: "+id+
+				"\n  - Band: \t\t"+band.id+" "+band.name+
+				"\n  - Participant: \t"+participant.id+" "+participant.name+
+				"\n  - Wishes ("+wishes.size()+"): \t"+builder;
 	}
 }
