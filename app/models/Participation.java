@@ -22,10 +22,10 @@ public class Participation extends Model {
 	public Participation(Band band, User participant) {
 		this.band = band;
 		this.participant = participant;
-		wishes = new ArrayList<>();
+		wishes = new ArrayList<Wish>();
 	}
 
-	public static Finder<Long,Participation> find = new Finder<>(Long.class, Participation.class);
+	public static Finder<Long,Participation> find = new Finder<Long,Participation>(Long.class, Participation.class);
 
 	public static List<Participation> findParticipations(Long userID) {
 		return find.where()

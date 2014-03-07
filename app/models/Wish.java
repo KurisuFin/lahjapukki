@@ -35,7 +35,7 @@ public class Wish extends Model {
 		return wish;
 	}
 
-	public static Finder<Long, Wish> find = new Finder<>(Long.class, Wish.class);
+	public static Finder<Long, Wish> find = new Finder<Long, Wish>(Long.class, Wish.class);
 
 	public static boolean isOwner(Long wishID, Long userID) {
 		return find.where()

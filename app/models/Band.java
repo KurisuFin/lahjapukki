@@ -29,11 +29,11 @@ public class Band extends Model {
 		this.created = new Date();
 		this.operator = operator;
 
-		participations = new ArrayList<>();
+		participations = new ArrayList<Participation>();
 		participations.add(Participation.create(this, operator));
 	}
 
-	public static Finder<Long, Band> find = new Finder<>(Long.class, Band.class);
+	public static Finder<Long, Band> find = new Finder<Long, Band>(Long.class, Band.class);
 
 	public static Band create(String name, Long creatorID) {
 		Band band = new Band(name, User.find.ref(creatorID));
@@ -54,11 +54,11 @@ public class Band extends Model {
 		if (participation != null)
 			return participation.wishes;
 		else
-			return new ArrayList<>();
+			return new ArrayList<Wish>();
 	}
 
 	public List<User> getUsers() {
-		List<User> users = new ArrayList<>();
+		List<User> users = new ArrayList<User>();
 
 		for (Participation participation : participations) {
 			users.add(participation.participant);

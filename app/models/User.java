@@ -26,7 +26,7 @@ public class User extends Model {
 		this.password = password;
 	}
 
-	public static Finder<Long, User> find = new Finder<>(Long.class, User.class);
+	public static Finder<Long, User> find = new Finder<Long, User>(Long.class, User.class);
 
 	public static User create(String email, String name, String password) {
 		User user = new User(email, name, password);
