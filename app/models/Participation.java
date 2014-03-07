@@ -17,15 +17,12 @@ public class Participation extends Model {
 	public User participant;
 	@OneToMany(mappedBy="participation", cascade=CascadeType.ALL)
 	public List<Wish> wishes;
-//	@ManyToMany
-//	public List<User> targets;
 
 
 	public Participation(Band band, User participant) {
 		this.band = band;
 		this.participant = participant;
 		wishes = new ArrayList<>();
-//		targets = new ArrayList<>();
 	}
 
 	public static Finder<Long,Participation> find = new Finder<>(Long.class, Participation.class);
@@ -46,16 +43,6 @@ public class Participation extends Model {
 	public static Participation create(Band band, User participant) {
 		return new Participation(band, participant);
 	}
-/*
-	public void addWish(Wish wish) {
-		wishes.add(wish);
-	}
-*/
-/*
-	public void addTarget(User target) {
-		targets.add(target);
-	}
-*/
 
 	@Override
 	public String toString() {

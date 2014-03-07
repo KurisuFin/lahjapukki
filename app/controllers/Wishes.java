@@ -12,22 +12,7 @@ import static play.data.Form.*;
 public class Wishes extends Controller {
 
 	public static Result add(Long participationID) {
-		/*
-		Wish wish = Wish.create(
-				Participation.find.byId(participationID),
-				"täät"
-		);
-		*/
-		System.out.println("TIIIIIIIIIIIIIT");
-//		System.out.println(form().bindFromRequest().data());
-
 		Form<Wish> wishForm = form(Wish.class).bindFromRequest();
-
-
-		System.out.println("JIIIIIIIIIIIIIIIIHAAAAAAAAAAAAAAAAAAA");
-		System.out.println(wishForm);
-		System.out.println(wishForm.get());
-//		System.out.println(wishForm.get());
 
 		return ok();
 	}

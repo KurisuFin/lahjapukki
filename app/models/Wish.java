@@ -23,11 +23,9 @@ public class Wish extends Model {
 
 	public static Wish create(Participation participation, String description) {
 		Wish wish = new Wish(participation, description);
-//		participation.wishes.add(wish);
 		wish.save();
 
 		return wish;
-//		return create(new Wish(), participation, description);
 	}
 
 	public static Wish create(Wish wish, Participation participation, String description) {

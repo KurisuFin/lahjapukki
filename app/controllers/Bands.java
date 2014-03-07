@@ -2,12 +2,9 @@ package controllers;
 
 import models.Band;
 import models.User;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-
-import static play.data.Form.form;
 
 @Security.Authenticated(Secured.class)
 public class Bands extends Controller {
@@ -26,23 +23,7 @@ public class Bands extends Controller {
 				Band.find.all()
 		));
 	}
-/*
-	public static Result add() {
-		Form<Band> bandForm = form(Band.class).bindFromRequest();
 
-
-		// Nämä uuteen uskoon
-		if (bandForm.hasErrors()) {
-			return badRequest();
-		} else {
-			return ok(views.html.bands.index.render(
-					User.find.byId(Application.getUserID()),
-					bandForm.get(),
-					Band.find.all()
-			));
-		}
-	}
-*/
 	public static Result delete(Long id) {
 		Band.find.byId(id).delete();
 		return ok();

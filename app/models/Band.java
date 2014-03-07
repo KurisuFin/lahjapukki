@@ -45,7 +45,6 @@ public class Band extends Model {
 		User user = User.find.ref(userID);
 		Participation participation = Participation.create(this, user);
 		participations.add(participation);
-//		user.add(participation);                // Probably not needed
 		participation.save();
 	}
 
@@ -65,12 +64,6 @@ public class Band extends Model {
 			users.add(participation.participant);
 		}
 
-/*		List<User> users = new ArrayList<>();
-
-		for (Participation participation : Participation.find.where().eq("band.id", id).findList()) {
-			users.add(participation.participant);
-		}
-*/
 		return users;
 	}
 
@@ -89,21 +82,6 @@ public class Band extends Model {
 	public Participation getParticipation(Long userID) {
 		return Participation.findParticipation(id, userID);
 	}
-/*
-	public static boolean isMember(Long bandID, Long userID) {
-		return find.where()
-				.eq("id", bandID)
-				.eq("participations.participant.id", userID)
-				.findRowCount() > 0;
-	}
-
-	public static boolean isOperator(Long bandID, Long userID) {
-		return find.where()
-				.eq("id", bandID)
-				.eq("operator.id", userID)
-				.findRowCount() > 0;
-	}
-*/
 
 
 	@Override

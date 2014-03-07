@@ -7,8 +7,6 @@ import play.test.WithApplication;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thoughtworks.selenium.SeleneseTestCase.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.inMemoryDatabase;
 
@@ -56,7 +54,7 @@ public class WishTest extends WithApplication {
 
 		// kolme viimeistä pitäisi olla null (ei toteutettu)
 
-		printDatabase();
+		// printDatabase();
 	}
 
 	private Wish createWish(Long bandID, Long userID, String name) {

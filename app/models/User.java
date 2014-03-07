@@ -49,15 +49,9 @@ public class User extends Model {
 	}
 
 
-//	public void add(Participation participation) {
-//		participations.add(participation);
-//	}
-
-
 
 	@Override
 	public String toString() {
-//		List<Participation> participations = Participation.findParticipations(id);
 		StringBuilder builder = new StringBuilder();
 
 		if (participations.size() > 0) {
